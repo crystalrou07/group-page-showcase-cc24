@@ -1,4 +1,7 @@
-# Actl4001 CC24 @ UNSW
+Actl4001 2024 SOA Challenge
+CC24 Consulting: SuperLife’s Travel Discouts and Health Check Scheme
+
+Members: Zi Qing (Nick) Ng, Albert Liu, Crystal Chong, Natalie Khalil and Hasibul Alam.
 
 CC24 GitHub landing page for SOA group project. Appreciate any feedback on what's good/bad, and what can be improved thanks! Looking forward to reading everyone's submissions. 
 
