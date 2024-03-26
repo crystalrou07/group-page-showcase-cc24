@@ -1,7 +1,6 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/biNKOeX_)
 # Actuarial Theory and Practice A @ UNSW
 
-_"Tell me and I forget. Teach me and I remember. Involve me and I learn" - Benjamin Franklin_
+_ CC24 GitHub landing page for SOA group project. Appreciate any feedback on what's good/bad, and what can be improved thanks!
 
 ---
 
