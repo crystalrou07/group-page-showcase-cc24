@@ -58,9 +58,6 @@ An important part of finding the profit for each year is to find the death benef
 
 <img width="893" alt="Screenshot 2024-04-07 at 10 57 07 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/0370a8e7-72d9-4f7f-94c7-1f362e34b2f5">
 
-
-
-
 From the in force data the face amounts of both policies are varying but are known for sure (deterministic). The randomness comes from the variables inside the indicator functions I(.) above. So to calculate profits, one needs DB. But since the latter is random, the best one can do is find its expected value E[DB] using machine learning (ML) techniques. For full details and maths derivations see Appendix 2.
 
 **Economic Value**
@@ -86,6 +83,7 @@ Implementing a dynamic pricing model to adjust prices based on real-time changes
 **RISK AND RISK MITIGATION CONSIDERATIONS**
 
 **Risks**
+
 In the case of implementing a health program and partnering with a chosen airline, an RDC categorisation method had been used to classify the risks.
 
 <img width="361" alt="Screenshot 2024-04-07 at 11 47 33 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/86cf144a-6843-4472-a0c7-d2f2eb814e96">
@@ -150,18 +148,20 @@ In other words, any increase in customers can magnify the difference in profit b
 
 **ASSUMPTIONS**
 
-
 **Modelling**
-	That insurers do not wrongly classify deaths as lapses in T20 premiums. Sometimes in life insurance, the policyholder dies but no one reports the event to the life insurer. This usually occurs when that person is living by themselves with no close family or friends. For simplicity that event is excluded here. So when someone lapses, they are alive at that time. Further when they lapse they are no longer eligible for death benefit (DB), hence data is no longer collected on them
+
+That insurers do not wrongly classify deaths as lapses in T20 premiums. Sometimes in life insurance, the policyholder dies but no one reports the event to the life insurer. This usually occurs when that person is living by themselves with no close family or friends. For simplicity that event is excluded here. So when someone lapses, they are alive at that time. Further when they lapse they are no longer eligible for death benefit (DB), hence data is no longer collected on them
 
 Ages and years are treated as discrete variables for modelling. Of course theoretically one can have fractional years (for example 0.5 years), but monthly and daily data are not given in the dataset anyways. For instance if someone is alive during 2023, then assume they are alive for the entire year.
 
 **Program Cost**
+
 Lumaria has a universal healthcare system. Similar to other countries with a universal healthcare system, such as Australia and Canada, it is assumed that Lumarian health check-ups including blood pressure readings, cholesterol level tests and age-specific preventative scans, are provided without upfront fees. 
 
 The travel points expense is only incurred once the policyholder completes the checklist and earns the reward. Therefore, the participation rate in the checklist program impacts the total expenses for SuperLife insurance. Travel is assumed to be an appropriate incentive for all ages, hence the willingness to complete the health check-ups will determine the participation rate in the program. The checklist participation rate was informed by the participation rate in Australian government-funded cancer screening programs, namely bowel cancer, breast cancer and cervical cancer. Similar to Lumaria’s health care, these programs were free, focused on early disease detection and were reasonably marketed as this program would be among SuperLife policyholders. The underlying trend in the data indicated increased participation with age, which was replicated in the assumed participation rate for the checklist program. Additionally, the participation rates for the screening programs were roughly increased by a factor of 0.3 to account for the incentivised nature of the checklist program and adjusted to a more linear trend for ease of use. 
 
 **Pricing**
+
 . Investment return used to calculate the present value of profit is 4% higher than the interest rate for 20-year term Insurance and 5% higher for Single Whole Life Insurance (SPWL). The reason that SPWL Insurance investment rate is higher is that it invested in a longer period thus higher return
 
 . Premiums are calculated by setting the pre-program profit margin to be 5%
@@ -189,6 +189,7 @@ The Lumaria mortality table is provided according to integer ages only. Policyho
 
 
 **Appendix**
+
 For the R code and Excel spreadsheets used in the analysis, please see those files in GitHub classroom. Generative AI was not used in this assignment.
 
 <img width="907" alt="Screenshot 2024-04-07 at 11 08 36 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/345af4af-bb08-4f17-9c6a-edbb24e41cd5">
@@ -209,6 +210,7 @@ From Figure 12, this shows the mortality rate (curve) increasing at an increasin
 
 
 2) **Modelling Death Benefits (DB) Using Survival Analysis Regression**
+   
 To model the expected death benefit E[DB], survival analysis regression was performed to predict the response Y = years before death = Year of Death (YoD) - Issue year. Importantly, notice how years before death and YoD are two different quantities (eventhough they sound the same).
 
 Where issue year is defined to be the start time (at time t = 0), and YoD is the end time (as usual in life insurance settings). The issue year varies among observations, but that does not matter as only the duration of time elapsed matters here. Since from the mortality data, the maximum age is 120 (with 100% mortality).
@@ -219,15 +221,18 @@ Where issue year is defined to be the start time (at time t = 0), and YoD is the
 <img width="726" alt="Screenshot 2024-04-07 at 11 14 23 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/fa3f4a31-4f75-4b15-b578-52c6e8cabe93">
 
 **Why Interval censored data but not right censored?**
+
 Usually in life insurance, there are right censored people who have the response values ranging from Y ∈ [Issue year+1,+∞). This is only if they assume that there is no theoretical maximum age (or no upper bound). However, from the in force data that is not the case because from above the maximum age is 120 years. Also there is no left censoring/truncation, nor right censored observations in in force data.
 
 
 **Model Selection**
+
 The in force data was split into 75% training and validation (for model selection and hyperparameter tuning), and 25% testing (for model assessment on unseen data). This was done via random shuffling and sampling to ensure that the training/validation/test distribution’s are as empirically similar as possible. Ultimately the “best” predictive model would be selected based on its ability to generalise on new data. Survival analysis is a very “special” type of regression, because the response years before death are interval censored for some rows. Hence, traditional regression metrics like RMSE and MAE are unsuitable because they rely on having a single number for observed Y. The first way is to find the negative log likelihood for each model on the validation data (this is equivalent to maximising the log likelihood function). So in this case the lower the better. Similarly, the second method is to compute the Uno’s C-index (lies between 0 and 1) for each model, and in this case the higher the better. Where c = 0.5 is the expected performance from pure random guessing.
 
 
 
 **Nested 8-Fold Cross Validation (CV)**
+
 Importantly, it is very important throughout this whole process to leave the test set untouched (until the very end) to prevent overly-optimistic predictions (information leakage into test data). 
 
 In the first step (inner loop), the hyperparameters above are tuned, and 8 estimates of the NLL and 8 UCI’s are obtained for each model and averaged to obtain CV measures. Then choose the optimal hyperparameters (via grid searching) for each model so that NLL is minimised, and UCI is maximised. 
@@ -244,10 +249,12 @@ From above, notice how XGboost with AFT (normally distributed noise) gives the l
 
 
 **Feature Selection and Model Assessment on XGboost with AFT (normally distributed noise)**
+
 Feature selection is performed to remove variables with low importance in XGboost, keeping only the top 3 most important predictors. Importance is measured using gain, which is the average loss reduction gained when using a feature for splitting. These are in descending order issue age, online distribution channel, and face amount.
 Finally, model assessment is performed on the test set (untouched before this!) to obtain generalisation error. This gives a final NLL = 6.505×10^(-5).
 
 **XGboost with Accelerated Failure Time (AFT) model**
+
 For prediction, generally more complex models perform better than the simpler ones (all else equal). Hence XGboost (extreme gradient boosting)  is used as an extension of GBM (gradient boosting machine), in which trees are grown sequentially on the residuals (or weaknesses) of the previous tree. AFT is commonly used in survival analysis and so used here. The general equation is
 
 <img width="863" alt="Screenshot 2024-04-07 at 11 17 22 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/8bf2ba0b-8521-416a-b790-0019946866c9">
@@ -264,7 +271,8 @@ Intuitively, Z represents the random noise that pulls the predictions away from 
  The objective is to find a good T(x) so that it maximises the likelihood function (or equivalently log-likelihood) of Z. Said otherwise, it is to minimise the negative log-likelihood function which was implemented. So the lower the metric the better. 
 
 
-3) Further Pricing Details and Formulas
+3) **Further Pricing Details and Formulas**
+   
 Cash flow for the year t CFt ,  reserve increase for that year CRt and interest accumulated  It . The cash flow CFt can be further broken down into different parts which include premium Pt, commission Ct, expenses Et , claims CLt .
 
 <img width="732" alt="Screenshot 2024-04-07 at 11 18 33 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/9307cdf2-8da7-4e41-8346-839ebb0c3616">
@@ -275,7 +283,6 @@ Cash flow for the year t CFt ,  reserve increase for that year CRt and interest 
 
 With both expenses and claims being respectively loaded to account for the programme implementation.
 
- 
  <img width="809" alt="Screenshot 2024-04-07 at 11 20 25 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/bfd75e0a-cb21-4dc4-9a9c-c5653364f8ab">
 
 <img width="532" alt="Screenshot 2024-04-07 at 11 21 01 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/63b060a7-8fd1-4d5a-8f55-5929142f7a97">
@@ -284,6 +291,7 @@ With both expenses and claims being respectively loaded to account for the progr
  
 
 4) Expense sensitivity analysis additional graphs
+   
  <img width="354" alt="Screenshot 2024-04-07 at 11 21 45 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/44ca3cd3-8176-441d-89b4-020bb46736c1">
 
  
@@ -292,6 +300,7 @@ With both expenses and claims being respectively loaded to account for the progr
  
 
 **Harvard Style Reference List**
+
 1) Australian Institute of Health and Welfare (AIHW) 2023, Cancer screening programs: quarterly data, viewed 24 March 2024, <https://www.aihw.gov.au/reports/cancer-screening/national-cancer-screening-programs-participation>
 
 
