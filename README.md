@@ -4,23 +4,30 @@
 **OBJECTIVES**
 
 Main Objectives
+
 . Reduce the mortality rate of current SuperLife policyholders 
+
 . Attract and retain healthy and health-conscious clients 
 
 Metrics 
+
 . Extent of reductions in mortality rate
+
 . Profitability of the program
+
 . Customer acquisition rates
 
 **EXPLORATORY DATA ANALYSIS (EDA) & DATA CLEANING**
 
 The file was loaded straight into R after downloading in their original format. The in force dataset was csv and the rest were xlsx Excel files. Data cleaning included removing empty rows and columns so that the data could be displayed better in RStudio. 
 
-Data Preparation and Cleaning
+**Data Preparation and Cleaning**
+
 For DB modelling, it’s very important to include as many policyholders as possible who are dead, lapsed, and still alive as of 2023. If we naively only analysed dead people, then that would underestimate the “true” average years before death of the sample given. This is because the years before death of people who are still alive or have lapsed is unknown and could possibly take high values. There cannot be too many missing NA values in the predictors and the response as it would propagate (especially in models with thousands of trees) and predictions would have many NA’s. At the same time, by keeping all columns and removing all NA values results in a totally empty dataset. Here, a balance is achieved by removing the year of lapse column, since 
 that has the highest percentage of NA values.
 
 Figure 1 below
+
 <img width="794" alt="Screenshot 2024-04-07 at 11 03 13 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/284330db-656c-4ac6-a8c8-31932a7bbc19">
 
 From above, the horizontal black line denotes the median, and the black star the mean of each cause of death. The median and mean lifespans for each disease are quite similar. Outliers are shown as individual dots when they are Q3 + 1.5*IQR or greater, or Q1-1.5*IQR or smaller. The disease O00-O99 has obviously a very small IQR (spread), and the lifespans of those afflicted are very short. This could be quite a severe disease that kills people at younger ages, however its frequency will be explored more in the corresponding barplot below. According to the ICD-10, O00-O99 refers to “personal history of complications of pregnancy, childbirth and the puerperium”.
@@ -36,14 +43,17 @@ We propose a joint venture between SuperLife Insurance and a Lumarian airline co
 The travel-based incentive program is designed to support the travel plans of policyholders, enabling them to spend and accumulate points across years to suit their unique schedules and reasons for travel. Surveys indicate that people who have entered retirement or have children are likely to increase the frequency of air travel when ticket prices decrease by just 20 pounds (AUD 38) (Davison & Ryley, 2013). Life insurance products are primarily aimed at these two demographics as the policyholder would require a beneficiary and will likely maintain a life insurance policy post-retirement. Additionally, the GDP per capita of the United Kingdom, in which the study was produced, is larger than that of Lumaria, suggesting that the economic response to discounted air travel in Lumaria may be more pronounced than that in the survey. Consequently, the program's flexibility and the reward system's relevance would produce a compelling incentive to encourage participation in this program. 
 
 **Partnership**
+
 The criteria upon which the Lumarian Airline will be selected include having a positive reputation, reasonable environmental awareness and an intention to expand its customer base. The joint venture will encourage current SuperLife policyholders to use the selected Airline as the checklist program exclusively awards travel points to this Airline. Through this, SuperLife Insurance will provide marketing for the Airline and additional customers and revenue. In exchange, the two partner companies will share the expenses incurred from the travel points.
 
 **Evaluation**
+
 Short-term evaluations will occur in 3-5 years. This will provide sufficient time for mortality reductions, through early disease detection, to occur and enable awareness of the program, through word-of-mouth and media outlets, to contribute towards a higher customer base for SuperLife Insurance. Long-term evaluations will occur in 5-10 years. This period was selected to facilitate the observation of trends in mortality data as well as the risk profile and rate of new policyholders.
 
 **PRICING / COSTS**
 
 **Death Benefits (DB) calculation**
+
 An important part of finding the profit for each year is to find the death benefit for that particular year. In this case, prediction is more important than inference, but the latter is still always useful to have to communicate to managers and stakeholders how the result was obtained. Note that whilst the current year may be 2024, that does not matter because the most recent data available is up to and including 2023 only. Hence there is no randomness in calculating DB for 2023, but there is for 2024 onwards due to the uncertainty of the future lifetimes. The total death benefits (DB) (aggregating all policyholders who are still in force) in a particular year T is given by
 
 <img width="893" alt="Screenshot 2024-04-07 at 10 57 07 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/0370a8e7-72d9-4f7f-94c7-1f362e34b2f5">
@@ -63,12 +73,14 @@ For the T20 assurance above on the left (Figure 3), there are now less deaths wi
 For the SPWL assurance on the top right (Figure 4), initially for the younger age group, the aggregate PV of profit is more or less similar pre and post program. As younger Lumarians are more healthy and have lower hazard rates than older ones (all else equal), health checks usually would reveal no fatal diseases at that point in time. So the program would not do much to decrease the mortality of younger people. The gap of improvement for the 3 older age groups seems to be around the same, with a 1.15 billion extra PV profit after program implementation. This means that those health checks really do help older generations detect and combat diseases early, meaning on average they die later leading to lower PV of death benefit.
 
 **Mortality Savings**
+
 Mortality Savings are calculated by the differences between PV of Profit before the program was implemented and after. The graph below on the left (Figure 5) below clearly shows that the 20-year term insurance mortality savings increased across older age groups. However, for the SPWL insurance on the bottom right (Figure 6), the mortality saving is decreasing then spiking at age group 46-55 and then decreasing once again. Although the program being implemented does have a positive effect on the mortality savings as demonstrated by the positive magnitudes, it does not seem to be as effective as the 20-year term. 
 
 
 <img width="929" alt="Screenshot 2024-04-07 at 11 05 25 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/cae92be9-d054-4ac2-9fe3-03d32387d086">
 
 **Pricing Changes**
+
 Implementing a dynamic pricing model to adjust prices based on real-time changes in various factors such as age group, mortality savings, economic value, and market conditions can be an ideal method in optimising sales.For instance,  adjusting prices to attract customers in age brackets where mortality savings are higher, SuperLife can effectively capitalise on the marketability of these policies. This can be done by offering more competitive premiums for younger age groups, where mortality savings are typically lower, can incentivise customers to purchase policies, thereby optimising sales and profitability.
 
 **RISK AND RISK MITIGATION CONSIDERATIONS**
@@ -76,16 +88,18 @@ Implementing a dynamic pricing model to adjust prices based on real-time changes
 **Risks**
 In the case of implementing a health program and partnering with a chosen airline, an RDC categorisation method had been used to classify the risks.
 
-<img width="409" alt="Screenshot 2024-04-07 at 11 38 17 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/fa5e8a9d-fe24-4eb3-9d73-383713bfffa6">
+<img width="361" alt="Screenshot 2024-04-07 at 11 47 33 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/86cf144a-6843-4472-a0c7-d2f2eb814e96">
+
 
 **Key Risk Mitigation Strategies**
 
 **Fraudulence Risk:**
-	Make the checklist short and beneficial, thereby discouraging fraud.
-	Conduct randomized audits where policyholders will be asked to provide proof of the consultation with the healthcare provider who signed the document.
+
+Make the checklist short and beneficial, thereby discouraging fraud. Conduct randomized audits where policyholders will be asked to provide proof of the consultation with the healthcare provider who signed the document.
 
 **Economic Risk:**
-	It is highly unlikely that the interest rate will rise significantly all of a sudden, with an estimated probability of 2% that the annual rate would rise over 10%. The 97.5% Value-at-Risk was tested on the discount rate, and the profit margins for all insurance products after our program was implemented are positive, and higher than if our program was never implemented. 
+
+It is highly unlikely that the interest rate will rise significantly all of a sudden, with an estimated probability of 2% that the annual rate would rise over 10%. The 97.5% Value-at-Risk was tested on the discount rate, and the profit margins for all insurance products after our program was implemented are positive, and higher than if our program was never implemented. 
 	To further mitigate such risks, the investment strategy of premiums and/or other cash received needs to be adjusted, such as diversifying invested assets or investing into inflation-protected assets. 
 	Conducting situational planning and doing regular stress testing exercises to assess the impact of different inflation scenarios on the financial performance of the insurance products and the overall business. SuperLife can develop multiple contingency plans and risk management strategies to mitigate the risk.
 
@@ -95,6 +109,7 @@ In the case of implementing a health program and partnering with a chosen airlin
 	Using numerous marketing strategies to enhance program visibility and attract a broader customer base. This may involve using various channels such as digital marketing, social media, television advertising, and the strategic partnership with the Lumarian airline.
 
 **Technology Risk:**
+
 . Implementing a system for the continuous monitoring of technological advancements, cybersecurity threats, and industry innovations. This could include the regular update of the systems, software, and infrastructure supporting the health incentive program
 
 . Implementing strict access controls and data encryption practices to safeguard sensitive information collected throughout the program. 
@@ -103,10 +118,12 @@ In the case of implementing a health program and partnering with a chosen airlin
 
 
 **Sensitivity Analysis**
+
 In order to test whether assumptions may be too unrealistic, sensitivity analysis is performed on discount (interest) rates, expenses, and percentage increase/decrease in new customers. 
 
 
 **Interest/Discount Rates**
+
 Discount rates ranging close to the assumed rate (2% - 5%) and 97.5% VaR (upper tail) are tested for both the whole life and 20-year insurance product. Test results show that compared to 20-year term insurance, the profitability of whole life insurance is more sensitive to interest rate changes. 
 Additionally, insurance for older age groups generally is more sensitive to price change than younger age group due to a worse mortality. However, for each insurance product sold, the new program is able to generate a higher profit margin for all tested interest rates. 
 
@@ -115,16 +132,18 @@ Additionally, insurance for older age groups generally is more sensitive to pric
 As seen above (Figure 7), regardless of interest rate and age group, the new product for whole life insurance is able to generate a higher profit margin. Moreover, the profit margin roughly forms a linear relationship as interest rates increase. The profit margin of the new program remains positive as long as interest rate is above 3%, which has more than 85% possibility of happening. So in other words, the degree of certainty that our proposed program can generate a positive profit and exceed profit without proposed program is greater than 85%.
 
 **Expenses**
+
 In the hypothetical scenario that the budgeted expense per policy year is too little for each policy sold, a test was run on 1.5 times and 2 times the original expense respectively. The insurance products for the 26-35 age group is presented below (see other age groups in appendix). 
 
 <img width="911" alt="Screenshot 2024-04-07 at 11 06 40 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/79f803dc-7ae6-4fd9-b04b-d54dabf915cd">
 
 Figure 8 is on the left and figure 9 on the right. The graphs show that when multiplying the assumed annual expense by 1.5, the impact is minimal in SPWL, as well as the T20 for higher face values. However this impact is catastrophic for the 100,000 and 50,000 face value policies as it may cause a significantly lower, or even a negative profit margin. The impact on whole life insurance with other age groups are not as drastic as shown in Figure 9, but for both 36-45 and 46-55 age groups, profit margin less than halved when annual expenses are doubled. Thus, if expenses are indeed underestimated, the pricing solution would need to be re-evaluated. 
 
-Potential Decrease in New Customers
+**Potential Decrease in New Customers**
+
 There is a relatively high chance of attracting new customers with our new product as it does improve mortality, however, due to potential strategic risk, there is a chance for the company to lose customers. After testing, even if the amount of policyholders dropped by 67% for 20-year term insurance and 32% for whole life insurance, the newly implemented program is still able to generate similar profits as before the program was implemented. However, 
-	If customers rise by 10%, the profit gap between the new and old program increases by 14% for the 20-year term insurance and 30% for the whole life insurance.
-	If customers rise by 25%, the profit gap between the new and old program increases by 37% for the 20-year term insurance and 73% for the whole life insurance.
+If customers rise by 10%, the profit gap between the new and old program increases by 14% for the 20-year term insurance and 30% for the whole life insurance.
+If customers rise by 25%, the profit gap between the new and old program increases by 37% for the 20-year term insurance and 73% for the whole life insurance.
 In other words, any increase in customers can magnify the difference in profit between the new program and the old program. 
 
 
