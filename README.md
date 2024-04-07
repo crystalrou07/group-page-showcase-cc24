@@ -1,8 +1,16 @@
 # 2024 SOA Challenge - CC24
 # Let Your Health Work For You
-# Health Check and Travel Discounts Scheme
-<img width="348" alt="Screenshot 2024-04-07 at 11 27 44 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/2ba1e957-bf07-429a-a835-6e7d4abf7ac7"> ![image](https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/e54e7f26-8773-450a-9cd7-31430e58733f)
+## Health Check and Travel Discounts Scheme
 
+![image](https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/e54e7f26-8773-450a-9cd7-31430e58733f)
+
+# Group Members
+* Zi Qing (Nick) Ng
+* Crystal Chong
+* Albert Liu
+* Natalie Khalil 
+* Hasibul Alam 
+# Report Overview
 
 **OBJECTIVES**
 
