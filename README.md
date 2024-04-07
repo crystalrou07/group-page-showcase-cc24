@@ -4,13 +4,13 @@
 **OBJECTIVES**
 
 Main Objectives
-	. Reduce the mortality rate of current SuperLife policyholders 
-	. Attract and retain healthy and health-conscious clients 
+. Reduce the mortality rate of current SuperLife policyholders 
+. Attract and retain healthy and health-conscious clients 
 
 Metrics 
-	. Extent of reductions in mortality rate
-	. Profitability of the program
-	. Customer acquisition rates
+. Extent of reductions in mortality rate
+. Profitability of the program
+. Customer acquisition rates
 
 **EXPLORATORY DATA ANALYSIS (EDA) & DATA CLEANING**
 
@@ -38,7 +38,7 @@ The travel-based incentive program is designed to support the travel plans of po
 **Partnership**
 The criteria upon which the Lumarian Airline will be selected include having a positive reputation, reasonable environmental awareness and an intention to expand its customer base. The joint venture will encourage current SuperLife policyholders to use the selected Airline as the checklist program exclusively awards travel points to this Airline. Through this, SuperLife Insurance will provide marketing for the Airline and additional customers and revenue. In exchange, the two partner companies will share the expenses incurred from the travel points.
 
-**Evaluation **
+**Evaluation**
 Short-term evaluations will occur in 3-5 years. This will provide sufficient time for mortality reductions, through early disease detection, to occur and enable awareness of the program, through word-of-mouth and media outlets, to contribute towards a higher customer base for SuperLife Insurance. Long-term evaluations will occur in 5-10 years. This period was selected to facilitate the observation of trends in mortality data as well as the risk profile and rate of new policyholders.
 
 **PRICING / COSTS**
@@ -53,7 +53,7 @@ An important part of finding the profit for each year is to find the death benef
 
 From the in force data the face amounts of both policies are varying but are known for sure (deterministic). The randomness comes from the variables inside the indicator functions I(.) above. So to calculate profits, one needs DB. But since the latter is random, the best one can do is find its expected value E[DB] using machine learning (ML) techniques. For full details and maths derivations see Appendix 2.
 
-**Economic Value **
+**Economic Value**
 
 The Present Value of Profit for each policy type is calculated by categorising our data into 4 different age groups 26 ~35, 36 ~ 45, 46 ~ 55, and 56 ~ 65 with different face amounts. Where the formula used to calculate is Pt – Ct – Et – CLt – CRt + It (Details for each case refer to appendix). Premiums, commission, reserve increase, and expenses are set by assumption. When the policyholder is integrated into the program, the mortality cost associated with the individual is reduced due to the decrease in mortality rate. Thus, PV of profit will decrease after the program is implemented if the mortality rate decreases the benefit claims.
 
@@ -76,9 +76,7 @@ Implementing a dynamic pricing model to adjust prices based on real-time changes
 **Risks**
 In the case of implementing a health program and partnering with a chosen airline, an RDC categorisation method had been used to classify the risks.
 
-<img width="428" alt="Screenshot 2024-04-07 at 10 58 42 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/c0f80998-d88f-4865-bbf7-d5de86400698">
-
-
+<img width="409" alt="Screenshot 2024-04-07 at 11 38 17 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/fa5e8a9d-fe24-4eb3-9d73-383713bfffa6">
 
 **Key Risk Mitigation Strategies**
 
@@ -139,7 +137,7 @@ In other words, any increase in customers can magnify the difference in profit b
 
 Ages and years are treated as discrete variables for modelling. Of course theoretically one can have fractional years (for example 0.5 years), but monthly and daily data are not given in the dataset anyways. For instance if someone is alive during 2023, then assume they are alive for the entire year.
 
-**Program Cost **
+**Program Cost**
 Lumaria has a universal healthcare system. Similar to other countries with a universal healthcare system, such as Australia and Canada, it is assumed that Lumarian health check-ups including blood pressure readings, cholesterol level tests and age-specific preventative scans, are provided without upfront fees. 
 
 The travel points expense is only incurred once the policyholder completes the checklist and earns the reward. Therefore, the participation rate in the checklist program impacts the total expenses for SuperLife insurance. Travel is assumed to be an appropriate incentive for all ages, hence the willingness to complete the health check-ups will determine the participation rate in the program. The checklist participation rate was informed by the participation rate in Australian government-funded cancer screening programs, namely bowel cancer, breast cancer and cervical cancer. Similar to Lumaria’s health care, these programs were free, focused on early disease detection and were reasonably marketed as this program would be among SuperLife policyholders. The underlying trend in the data indicated increased participation with age, which was replicated in the assumed participation rate for the checklist program. Additionally, the participation rates for the screening programs were roughly increased by a factor of 0.3 to account for the incentivised nature of the checklist program and adjusted to a more linear trend for ease of use. 
@@ -240,7 +238,8 @@ For prediction, generally more complex models perform better than the simpler on
 
 Intuitively, Z represents the random noise that pulls the predictions away from the true ln(Y). To incorporate XGboost into the AFT framework, the dot product (w,x) is replaced with a transformation (or mapping) x →T(x). Where T(x) is the output from a decision tree ensemble. The equation now becomes 
 
-<img width="242" alt="Screenshot 2024-04-07 at 11 17 45 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/a57a498c-50bc-486c-bf75-6f1962aa1997">
+<img width="220" alt="Screenshot 2024-04-07 at 11 40 23 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/33b15e7f-ec4b-4662-b220-5aa8726b81a5">
+
 
 
  The objective is to find a good T(x) so that it maximises the likelihood function (or equivalently log-likelihood) of Z. Said otherwise, it is to minimise the negative log-likelihood function which was implemented. So the lower the metric the better. 
