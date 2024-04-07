@@ -112,8 +112,7 @@ In order to test whether assumptions may be too unrealistic, sensitivity analysi
 Discount rates ranging close to the assumed rate (2% - 5%) and 97.5% VaR (upper tail) are tested for both the whole life and 20-year insurance product. Test results show that compared to 20-year term insurance, the profitability of whole life insurance is more sensitive to interest rate changes. 
 Additionally, insurance for older age groups generally is more sensitive to price change than younger age group due to a worse mortality. However, for each insurance product sold, the new program is able to generate a higher profit margin for all tested interest rates. 
 
-![Uploading Screenshot 2024-04-07 at 11.06.01 pm.png…]()
-
+<img width="388" alt="Screenshot 2024-04-07 at 11 12 10 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/2c65b140-c84d-48e7-8915-06a87daea367">
 
 As seen above (Figure 7), regardless of interest rate and age group, the new product for whole life insurance is able to generate a higher profit margin. Moreover, the profit margin roughly forms a linear relationship as interest rates increase. The profit margin of the new program remains positive as long as interest rate is above 3%, which has more than 85% possibility of happening. So in other words, the degree of certainty that our proposed program can generate a positive profit and exceed profit without proposed program is greater than 85%.
 
@@ -192,114 +191,88 @@ From the frequency histogram above (Figure 11), the most popular issue ages of l
 From Figure 12, this shows the mortality rate (curve) increasing at an increasing rate as people grow older. This is a typical convex curve used to model human mortality. Notice how the graduated smooth curve fits nicely over the plotted points, with the exception of the outlier at age 120 (maximum age where everyone must die before).
 
 
-2) Modelling Death Benefits (DB) Using Survival Analysis Regression
+2) **Modelling Death Benefits (DB) Using Survival Analysis Regression**
 To model the expected death benefit E[DB], survival analysis regression was performed to predict the response Y = years before death = Year of Death (YoD) - Issue year. Importantly, notice how years before death and YoD are two different quantities (eventhough they sound the same).
 
 Where issue year is defined to be the start time (at time t = 0), and YoD is the end time (as usual in life insurance settings). The issue year varies among observations, but that does not matter as only the duration of time elapsed matters here. Since from the mortality data, the maximum age is 120 (with 100% mortality).
 
-Death Age/lifespan <= 120 years,
-YoD - Birth year <= 120,
-Issue year + years before death - birth year <= 120
-
-Rearranging the response variable one obtains the upper bound 
-Y = years before death <= 120 - Issue year + birth year〖=Y〗_max.
-At the issue year, the person is definitely alive, and so his earliest YoD is issue year + 1. Then Y_(min )=1. To get more specific ranges for each type of person see below
-
-Censoring Among Different Groups
-Group segments 	Ranges for Y = years before death	Type of censoring
-	If YoD = 2023 or before	Y should be clearly defined with a single value in the data.	Uncensored
-	If Lapse year = 2023 or before (lapsed)	Lapse year +1<=Y<=Y_max	Interval
-	If still alive as of 2023	2024-Issue year<=Y<=Y_max	Interval
+<img width="701" alt="Screenshot 2024-04-07 at 11 13 30 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/98bffb9d-e900-4ad7-b54c-43c51ef445a1">
 
 
-Why Interval censored data but not right censored?
+<img width="726" alt="Screenshot 2024-04-07 at 11 14 23 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/fa3f4a31-4f75-4b15-b578-52c6e8cabe93">
+
+**Why Interval censored data but not right censored?**
 Usually in life insurance, there are right censored people who have the response values ranging from Y ∈ [Issue year+1,+∞). This is only if they assume that there is no theoretical maximum age (or no upper bound). However, from the in force data that is not the case because from above the maximum age is 120 years. Also there is no left censoring/truncation, nor right censored observations in in force data.
 
 
-Model Selection
+**Model Selection**
 The in force data was split into 75% training and validation (for model selection and hyperparameter tuning), and 25% testing (for model assessment on unseen data). This was done via random shuffling and sampling to ensure that the training/validation/test distribution’s are as empirically similar as possible. Ultimately the “best” predictive model would be selected based on its ability to generalise on new data. Survival analysis is a very “special” type of regression, because the response years before death are interval censored for some rows. Hence, traditional regression metrics like RMSE and MAE are unsuitable because they rely on having a single number for observed Y. The first way is to find the negative log likelihood for each model on the validation data (this is equivalent to maximising the log likelihood function). So in this case the lower the better. Similarly, the second method is to compute the Uno’s C-index (lies between 0 and 1) for each model, and in this case the higher the better. Where c = 0.5 is the expected performance from pure random guessing.
 
 
 
-Nested 8-Fold Cross Validation (CV)
+**Nested 8-Fold Cross Validation (CV)**
 Importantly, it is very important throughout this whole process to leave the test set untouched (until the very end) to prevent overly-optimistic predictions (information leakage into test data). 
 
 In the first step (inner loop), the hyperparameters above are tuned, and 8 estimates of the NLL and 8 UCI’s are obtained for each model and averaged to obtain CV measures. Then choose the optimal hyperparameters (via grid searching) for each model so that NLL is minimised, and UCI is maximised. 
 
 In the next step (outer loop), construct a new training set made up of the above so that new train = old train + old validation set. Recall that is 75% of the in force data is (new train + new validation) = old train + old validation + new validation. Obtain the NLL and UCI for each model (each with its own set of optimal hyperparameters). Then finally, pick the best/winner model with the lowest NLL and/or highest Uno’s C-index.
 
+<img width="680" alt="Screenshot 2024-04-07 at 11 16 04 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/8c633561-fc93-4e03-8e21-4c533dc57f3a">
 
-DB Modelling Results and Discussion
-Table of Metrics for each Model (Already Hyperparameter Tuned) on New Validation Set
-	Cox PH model with elastic net penalty*
 
-(baseline model)	Weibull AFT with elastic net penalty 	XGboost with AFT (normally distributed noise)
-1) Negative (partial*)  log likelihood (N(P)LL)	0.3259
-(3rd)	17.35×10^(-3)
-
-(2nd)	6.294×10^(-5) (1st)
-2) Uno’s C-index (UCI)	0.6438	0.5709	0.6982
-3) Number of hyperparameters to tune	2. 
-The shrinkage/regularisation parameter ɑ. 
-And the mixture parameter r, which is the relative weights of L1 (lasso) and L2 (ridge) penalties	2. 
-The shrinkage/regularisation parameter ɑ. 
-And the mixture parameter r, which is the relative weights of L1 (lasso) and L2 (ridge) penalties	5.
-Number of trees N, max depth of each tree, learning rate, maximum number of child nodes, learning rate, dropout rate, subsampling 
-
-N above needs to be regularised using other parameters above to prevent overfitting. By subsampling only a portion of training rows and/or columns, this is called stochastic gradient boosting (SGB)
 
 Importantly, a model with the highest UCI tends to give good predicted rankings of death, but not necessarily good predicted death times. It does not care about their actual/observed times, but rather the order in which they happened (scale and shift invariant). This could be problematic in calculating DB, because for that you need to predict in which particular year they died in. So NLL is a more important metric in this case, and UCI is only used as a tiebreaker if the models have the same NLL.
 
 From above, notice how XGboost with AFT (normally distributed noise) gives the lowest NLL and highest UCI on the new validation set (which directly estimates test error). Hence, XGboost (winner or best model) is expected to give the best performance in predicting both the YoD (by NLL) and the order in which it happens among policyholders (by UCI).
 
 
-Feature Selection and Model Assessment on XGboost with AFT (normally distributed noise)
+**Feature Selection and Model Assessment on XGboost with AFT (normally distributed noise)**
 Feature selection is performed to remove variables with low importance in XGboost, keeping only the top 3 most important predictors. Importance is measured using gain, which is the average loss reduction gained when using a feature for splitting. These are in descending order issue age, online distribution channel, and face amount.
 Finally, model assessment is performed on the test set (untouched before this!) to obtain generalisation error. This gives a final NLL = 6.505×10^(-5).
 
-XGboost with Accelerated Failure Time (AFT) model
+**XGboost with Accelerated Failure Time (AFT) model**
 For prediction, generally more complex models perform better than the simpler ones (all else equal). Hence XGboost (extreme gradient boosting)  is used as an extension of GBM (gradient boosting machine), in which trees are grown sequentially on the residuals (or weaknesses) of the previous tree. AFT is commonly used in survival analysis and so used here. The general equation is
 
-ln(Y)=(w,x) +σZ
+<img width="863" alt="Screenshot 2024-04-07 at 11 17 22 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/8bf2ba0b-8521-416a-b790-0019946866c9">
 
-Where Y = years before death, w ∈〖 R〗^d is a column vector consisting of d coefficients for each predictor. And x ∈〖 R〗^d is a column vector that is the features themselves. (w,x) is the dot product of column vectors w and x. σ is a constant that scales the size of Z. And Z is a random variable (r.v.) of a known probability distribution. Depending on tail heaviness of the PDF, the choices are the normal distribution, the logistic distribution, and the extreme distribution. 
+
+
 
 Intuitively, Z represents the random noise that pulls the predictions away from the true ln(Y). To incorporate XGboost into the AFT framework, the dot product (w,x) is replaced with a transformation (or mapping) x →T(x). Where T(x) is the output from a decision tree ensemble. The equation now becomes 
 
-ln(Y)=T(x) +σZ
+<img width="242" alt="Screenshot 2024-04-07 at 11 17 45 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/a57a498c-50bc-486c-bf75-6f1962aa1997">
+
 
  The objective is to find a good T(x) so that it maximises the likelihood function (or equivalently log-likelihood) of Z. Said otherwise, it is to minimise the negative log-likelihood function which was implemented. So the lower the metric the better. 
 
 
 3) Further Pricing Details and Formulas
-Cash flow for the year t CFt ,  reserve increase for that year CRt and interest accumulated  It . The cash flow CFt can be further broken down into different parts which include premium Pt, commission Ct, expenses Et , claims CLt . 
+Cash flow for the year t CFt ,  reserve increase for that year CRt and interest accumulated  It . The cash flow CFt can be further broken down into different parts which include premium Pt, commission Ct, expenses Et , claims CLt .
+
+<img width="732" alt="Screenshot 2024-04-07 at 11 18 33 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/9307cdf2-8da7-4e41-8346-839ebb0c3616">
+
+<img width="999" alt="Screenshot 2024-04-07 at 11 19 33 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/c9138e68-65fb-4070-b553-58cd75ce46c9">
 
 
-20 - Year Term Insurance (T20)	Pricing Formula
-Pre - Programme	CFt  – CRt  + It  
-Post - Programme	CF*t  – CRt  + It  
-
-
-Single Life Whole Life Insurance (SPWL)	Pricing Formula
-Pre - Programme	CFt  – CRt  + It  
-Post - Programme	CF*t  – CRt  + It  
- Where:
-CFt = Pt – Ct – Et – CLt	&    CF*t = Pt – Ct – E*t – CL*t
 With both expenses and claims being respectively loaded to account for the programme implementation.
 
  
- 
- 
- 
- 
- 
-4) Expense sensitivity analysis additional graphs
- 
- 
+ <img width="809" alt="Screenshot 2024-04-07 at 11 20 25 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/bfd75e0a-cb21-4dc4-9a9c-c5653364f8ab">
+
+<img width="532" alt="Screenshot 2024-04-07 at 11 21 01 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/63b060a7-8fd1-4d5a-8f55-5929142f7a97">
+
  
  
 
-Harvard Style Reference List
+4) Expense sensitivity analysis additional graphs
+ <img width="354" alt="Screenshot 2024-04-07 at 11 21 45 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/44ca3cd3-8176-441d-89b4-020bb46736c1">
+
+ 
+ <img width="309" alt="Screenshot 2024-04-07 at 11 21 56 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/9b7c6b31-6e6a-4bc3-818e-163432e55cc0">
+
+ 
+
+[**Harvard Style Reference List**]
 	Australian Institute of Health and Welfare (AIHW) 2023, Cancer screening programs: quarterly data, viewed 24 March 2024, <https://www.aihw.gov.au/reports/cancer-screening/national-cancer-screening-programs-participation>
 
 
