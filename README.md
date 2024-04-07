@@ -1,5 +1,5 @@
 
- <img width="324" alt="Screenshot 2024-04-07 at 11 02 36 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/cebd3d96-7516-4fd0-a717-562feff8ff08">
+<img width="348" alt="Screenshot 2024-04-07 at 11 27 44 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/2ba1e957-bf07-429a-a835-6e7d4abf7ac7">
 
 **OBJECTIVES**
 
@@ -272,8 +272,8 @@ With both expenses and claims being respectively loaded to account for the progr
 
  
 
-[**Harvard Style Reference List**]
-	Australian Institute of Health and Welfare (AIHW) 2023, Cancer screening programs: quarterly data, viewed 24 March 2024, <https://www.aihw.gov.au/reports/cancer-screening/national-cancer-screening-programs-participation>
+**Harvard Style Reference List**
+1) Australian Institute of Health and Welfare (AIHW) 2023, Cancer screening programs: quarterly data, viewed 24 March 2024, <https://www.aihw.gov.au/reports/cancer-screening/national-cancer-screening-programs-participation>
 
 
 
