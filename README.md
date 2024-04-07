@@ -1,17 +1,17 @@
-
+<img width="441" alt="Screenshot 2024-04-07 at 10 58 22 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/f98fbb86-24e7-4a67-9784-980228db3c52">
  
 	OBJECTIVES
 
 Main Objectives
-	Reduce the mortality rate of current SuperLife policyholders 
-	Attract and retain healthy and health-conscious clients 
+	. Reduce the mortality rate of current SuperLife policyholders 
+	. Attract and retain healthy and health-conscious clients 
 
 Metrics 
-	Extent of reductions in mortality rate
-	Profitability of the program
-	Customer acquisition rates
+	. Extent of reductions in mortality rate
+	. Profitability of the program
+	. Customer acquisition rates
 
-	EXPLORATORY DATA ANALYSIS (EDA) & DATA CLEANING
+**EXPLORATORY DATA ANALYSIS (EDA) & DATA CLEANING**
 
 The file was loaded straight into R after downloading in their original format. The in force dataset was csv and the rest were xlsx Excel files. Data cleaning included removing empty rows and columns so that the data could be displayed better in RStudio. 
 
@@ -25,97 +25,83 @@ From above, the horizontal black line denotes the median, and the black star the
 
 From figure 2 on the left, note that the rates increase and decrease together and seem to be highly correlated with one another. In 2015 when the 1 year risk free (r.f) annual spot rate and overnight rate starts to increase again. Interestingly, the 10-year r.f annual spot rate still has not started increasing yet even at 2023. For more EDA plots and further analysis, see Appendix 1.
 
-	PROGRAM DESIGN
+**PROGRAM DESIGN**
 
 We propose a joint venture between SuperLife Insurance and a Lumarian airline company, in which policyholders are awarded travel points for completing a health checklist. The checklist will monitor blood pressure, cholesterol and other markers of a healthy circulatory system and include preventative scans for various conditions such as cancer. Neoplasms (C00-D48) and circulatory system diseases (I00-I99) are responsible for 63% of policyholder deaths between 2001 and 2023, with the average age of death being 59.8 and 60.5, respectively. These ages are below the average Lumarian life expectancy, 78.4, indicating that mortality improvements are achievable. Early detection of these two primary causes of death will reduce mortality rates by 10-20% according to similar Lumarian intervention schemes. The checklist is an online document that can be printed by the policyholder and presented to the relevant medical practitioner, who will sign, stamp and date the appropriate area of the form to confirm the policyholder’s completion of a checklist task. SuperLife Insurance only incentivises the completion of this checklist without funding the scans or tests. 
 
 The travel-based incentive program is designed to support the travel plans of policyholders, enabling them to spend and accumulate points across years to suit their unique schedules and reasons for travel. Surveys indicate that people who have entered retirement or have children are likely to increase the frequency of air travel when ticket prices decrease by just 20 pounds (AUD 38) (Davison & Ryley, 2013). Life insurance products are primarily aimed at these two demographics as the policyholder would require a beneficiary and will likely maintain a life insurance policy post-retirement. Additionally, the GDP per capita of the United Kingdom, in which the study was produced, is larger than that of Lumaria, suggesting that the economic response to discounted air travel in Lumaria may be more pronounced than that in the survey. Consequently, the program's flexibility and the reward system's relevance would produce a compelling incentive to encourage participation in this program. 
 
-Partnership
+**Partnership**
 The criteria upon which the Lumarian Airline will be selected include having a positive reputation, reasonable environmental awareness and an intention to expand its customer base. The joint venture will encourage current SuperLife policyholders to use the selected Airline as the checklist program exclusively awards travel points to this Airline. Through this, SuperLife Insurance will provide marketing for the Airline and additional customers and revenue. In exchange, the two partner companies will share the expenses incurred from the travel points.
 
-Evaluation 
+**Evaluation **
 Short-term evaluations will occur in 3-5 years. This will provide sufficient time for mortality reductions, through early disease detection, to occur and enable awareness of the program, through word-of-mouth and media outlets, to contribute towards a higher customer base for SuperLife Insurance. Long-term evaluations will occur in 5-10 years. This period was selected to facilitate the observation of trends in mortality data as well as the risk profile and rate of new policyholders.
 
-	PRICING / COSTS
+**PRICING / COSTS**
 
-Death Benefits (DB) calculation
+**Death Benefits (DB) calculation**
 An important part of finding the profit for each year is to find the death benefit for that particular year. In this case, prediction is more important than inference, but the latter is still always useful to have to communicate to managers and stakeholders how the result was obtained. Note that whilst the current year may be 2024, that does not matter because the most recent data available is up to and including 2023 only. Hence there is no randomness in calculating DB for 2023, but there is for 2024 onwards due to the uncertainty of the future lifetimes. The total death benefits (DB) (aggregating all policyholders who are still in force) in a particular year T is given by
 
-
-
-
+<img width="893" alt="Screenshot 2024-04-07 at 10 57 07 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/0370a8e7-72d9-4f7f-94c7-1f362e34b2f5">
 
 
 
 
 From the in force data the face amounts of both policies are varying but are known for sure (deterministic). The randomness comes from the variables inside the indicator functions I(.) above. So to calculate profits, one needs DB. But since the latter is random, the best one can do is find its expected value E[DB] using machine learning (ML) techniques. For full details and maths derivations see Appendix 2.
 
-Economic Value 
+**Economic Value **
 
 The Present Value of Profit for each policy type is calculated by categorising our data into 4 different age groups 26 ~35, 36 ~ 45, 46 ~ 55, and 56 ~ 65 with different face amounts. Where the formula used to calculate is Pt – Ct – Et – CLt – CRt + It (Details for each case refer to appendix). Premiums, commission, reserve increase, and expenses are set by assumption. When the policyholder is integrated into the program, the mortality cost associated with the individual is reduced due to the decrease in mortality rate. Thus, PV of profit will decrease after the program is implemented if the mortality rate decreases the benefit claims.
 
-Pricing Pre-Program VS Post-Program
+**Pricing Pre-Program VS Post-Program**
 
- 
 For the T20 assurance above on the left (Figure 3), there are now less deaths within the 20 year term with the program compared to without. This is because with the predicted increase in health check ups, people have increased awareness and are able to detect possibly fatal diseases earlier. This leads them to act and seek medical intervention before the condition deteriorates. The biggest improvement is in the 46-55 age group, where the PV of profit jumps from 800 million Lumarian Crowns (LC) to 2400 million. 
 For the SPWL assurance on the top right (Figure 4), initially for the younger age group, the aggregate PV of profit is more or less similar pre and post program. As younger Lumarians are more healthy and have lower hazard rates than older ones (all else equal), health checks usually would reveal no fatal diseases at that point in time. So the program would not do much to decrease the mortality of younger people. The gap of improvement for the 3 older age groups seems to be around the same, with a 1.15 billion extra PV profit after program implementation. This means that those health checks really do help older generations detect and combat diseases early, meaning on average they die later leading to lower PV of death benefit.
 
-Mortality Savings
+**Mortality Savings**
 Mortality Savings are calculated by the differences between PV of Profit before the program was implemented and after. The graph below on the left (Figure 5) below clearly shows that the 20-year term insurance mortality savings increased across older age groups. However, for the SPWL insurance on the bottom right (Figure 6), the mortality saving is decreasing then spiking at age group 46-55 and then decreasing once again. Although the program being implemented does have a positive effect on the mortality savings as demonstrated by the positive magnitudes, it does not seem to be as effective as the 20-year term. 
 
 Pricing Changes
 Implementing a dynamic pricing model to adjust prices based on real-time changes in various factors such as age group, mortality savings, economic value, and market conditions can be an ideal method in optimising sales.For instance,  adjusting prices to attract customers in age brackets where mortality savings are higher, SuperLife can effectively capitalise on the marketability of these policies. This can be done by offering more competitive premiums for younger age groups, where mortality savings are typically lower, can incentivise customers to purchase policies, thereby optimising sales and profitability.
 
-	RISK AND RISK MITIGATION CONSIDERATIONS
+**RISK AND RISK MITIGATION CONSIDERATIONS**
 
-Risks
+**Risks**
 In the case of implementing a health program and partnering with a chosen airline, an RDC categorisation method had been used to classify the risks.
 
+<img width="428" alt="Screenshot 2024-04-07 at 10 58 42 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/c0f80998-d88f-4865-bbf7-d5de86400698">
 
 
-Risk	Explanation
-Fraudulence Risk	There is a risk that unethical doctors may fake health checks for friends or relatives who then purchase the insurance product, potentially causing the pricing model to underestimate mortality.
-Strategic Risk	There is a risk that the program may not attract as many policyholders as predicted and may lead to a slower (or even possibly negative) growth in SuperLife’s customer base and revenue. Since this is the first time an intervention program like this has been implemented, this risk is increased because there is no past data to draw from.
-Reputational Risk	If the selected Lumarian airline fails to meet customer expectations and has a negative brand image (now or in the future), SuperLife’s reputation could be tarnished by the partnership.
-Environmental Risk	Partnering with an airline that has a bad environmental presence may lead to backlash from existing and potential customers. It can also lead to regulation issues.
-Operational Risk	Disruptions and failures within SuperLife's internal processes and people. This includes administrative, software implementation failures which threatens the profitability of the company.
-Discrimination Risk	The programme’s incentives inherently discouraging high-risk profiles from voluntarily participating
-Equity Risk	The risk of disproportionate impacts or inequities among program participants.
-Economic Risk	At higher inflation rates, purchasing power would decline, and investment returns are likely to be negatively impacted. 
-From past data, the annual inflation rate ranged from 0.19% to 12.62%, with a sample mean of 4.3%. 
-Regulatory Risk	The risk of changes in government regulations or policies that could impact the insurance industry or the health incentive program.
-Technological Risk	The risk of technological failures or disruptions that could affect the delivery or effectiveness of the health incentive program.
-Legal Risk	The risk of legal challenges or lawsuits related to the health incentive program.
 
-Key Risk Mitigation Strategies
+**Key Risk Mitigation Strategies**
 
-Fraudulence Risk:
+**Fraudulence Risk:**
 	Make the checklist short and beneficial, thereby discouraging fraud.
 	Conduct randomized audits where policyholders will be asked to provide proof of the consultation with the healthcare provider who signed the document.
 
-Economic Risk:
+**Economic Risk:**
 	It is highly unlikely that the interest rate will rise significantly all of a sudden, with an estimated probability of 2% that the annual rate would rise over 10%. The 97.5% Value-at-Risk was tested on the discount rate, and the profit margins for all insurance products after our program was implemented are positive, and higher than if our program was never implemented. 
 	To further mitigate such risks, the investment strategy of premiums and/or other cash received needs to be adjusted, such as diversifying invested assets or investing into inflation-protected assets. 
 	Conducting situational planning and doing regular stress testing exercises to assess the impact of different inflation scenarios on the financial performance of the insurance products and the overall business. SuperLife can develop multiple contingency plans and risk management strategies to mitigate the risk.
 
-Market Risk:
+**Market Risk:**
 	Doing adequate market research to identify potential target demographics, market trends, and competitor strategies. This includes analysing customer preferences, customer demands and regulatory considerations to ensure the program aligns with the market’s needs.
 	Adopting an efficient and versatile approach in program designing and implementation; this allows for flexibility and adaptation based on market feedback and changing dynamics. Potential mitigation examples could include incorporating feedback loops, pilot testing, and iterative improvements to optimise program effectiveness and again aligning with the market’s needs.
 	Using numerous marketing strategies to enhance program visibility and attract a broader customer base. This may involve using various channels such as digital marketing, social media, television advertising, and the strategic partnership with the Lumarian airline.
 
-Technology Risk:
-	Implementing a system for the continuous monitoring of technological advancements, cybersecurity threats, and industry innovations. This could include the regular update of the systems, software, and infrastructure supporting the health incentive program.
-	Implementing strict access controls and data encryption practices to safeguard sensitive information collected throughout the program. 
-	Providing training to employees on cybersecurity best practices to minimise the risk of human error leading to vulnerabilities and malpractices.
+**Technology Risk:**
+. Implementing a system for the continuous monitoring of technological advancements, cybersecurity threats, and industry innovations. This could include the regular update of the systems, software, and infrastructure supporting the health incentive program
+
+. Implementing strict access controls and data encryption practices to safeguard sensitive information collected throughout the program. 
+
+. Providing training to employees on cybersecurity best practices to minimise the risk of human error leading to vulnerabilities and malpractices.
 
 
-
-Sensitivity Analysis
+**Sensitivity Analysis**
 In order to test whether assumptions may be too unrealistic, sensitivity analysis is performed on discount (interest) rates, expenses, and percentage increase/decrease in new customers. 
 
 
-Interest/Discount Rates
+**Interest/Discount Rates**
 Discount rates ranging close to the assumed rate (2% - 5%) and 97.5% VaR (upper tail) are tested for both the whole life and 20-year insurance product. Test results show that compared to 20-year term insurance, the profitability of whole life insurance is more sensitive to interest rate changes. 
 Additionally, insurance for older age groups generally is more sensitive to price change than younger age group due to a worse mortality. However, for each insurance product sold, the new program is able to generate a higher profit margin for all tested interest rates. 
 
@@ -134,15 +120,15 @@ In other words, any increase in customers can magnify the difference in profit b
 
 
 
-	ASSUMPTIONS
+**ASSUMPTIONS**
 
 
-Modelling
+**Modelling**
 	That insurers do not wrongly classify deaths as lapses in T20 premiums. Sometimes in life insurance, the policyholder dies but no one reports the event to the life insurer. This usually occurs when that person is living by themselves with no close family or friends. For simplicity that event is excluded here. So when someone lapses, they are alive at that time. Further when they lapse they are no longer eligible for death benefit (DB), hence data is no longer collected on them
 
-	Ages and years are treated as discrete variables for modelling. Of course theoretically one can have fractional years (for example 0.5 years), but monthly and daily data are not given in the dataset anyways. For instance if someone is alive during 2023, then assume they are alive for the entire year.
+Ages and years are treated as discrete variables for modelling. Of course theoretically one can have fractional years (for example 0.5 years), but monthly and daily data are not given in the dataset anyways. For instance if someone is alive during 2023, then assume they are alive for the entire year.
 
-Program Cost 
+**Program Cost **
 Lumaria has a universal healthcare system. Similar to other countries with a universal healthcare system, such as Australia and Canada, it is assumed that Lumarian health check-ups including blood pressure readings, cholesterol level tests and age-specific preventative scans, are provided without upfront fees. 
 
 The travel points expense is only incurred once the policyholder completes the checklist and earns the reward. Therefore, the participation rate in the checklist program impacts the total expenses for SuperLife insurance. Travel is assumed to be an appropriate incentive for all ages, hence the willingness to complete the health check-ups will determine the participation rate in the program. The checklist participation rate was informed by the participation rate in Australian government-funded cancer screening programs, namely bowel cancer, breast cancer and cervical cancer. Similar to Lumaria’s health care, these programs were free, focused on early disease detection and were reasonably marketed as this program would be among SuperLife policyholders. The underlying trend in the data indicated increased participation with age, which was replicated in the assumed participation rate for the checklist program. Additionally, the participation rates for the screening programs were roughly increased by a factor of 0.3 to account for the incentivised nature of the checklist program and adjusted to a more linear trend for ease of use. 
@@ -155,36 +141,22 @@ Pricing
 	Premium, commission, reserve increase and interest are assumed to be constant across pre and post program implementation.
 	The effect of two interventions on mortality are assumed to be independent. 
 
-	EXTERNAL DATA AND DATA LIMITATIONS
+**EXTERNAL DATA AND DATA LIMITATIONS**
 
 Additional Data Used 
 Participation rate data for Australian government-funded cancer screening programs was used to determine the probability that policyholders will complete the health checklist. This data was from the Australian Institute of Health and Welfare (AIHW). This was incorporated in the calculation of the expenses of the program. 
 
-Data Limitations
+**Data Limitations**
 
-	The Lumaria mortality table is provided according to integer ages only. Policyholders of all sexes, smoke status, and regions are aggregated together. This makes it really difficult to perform data analysis because one cannot differentiate if mortality rate is different between males and females, smokers and non-smokers, and so on.
-
-
+The Lumaria mortality table is provided according to integer ages only. Policyholders of all sexes, smoke status, and regions are aggregated together. This makes it really difficult to perform data analysis because one cannot differentiate if mortality rate is different between males and females, smokers and non-smokers, and so on.
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Appendix
+**Appendix**
 For the R code and Excel spreadsheets used in the analysis, please see those files in GitHub classroom. Generative AI was not used in this assignment.
 
-	Exploratory Data Analysis (EDA) (continued)
+**Exploratory Data Analysis (EDA) (continued)**
  
 
 From the frequency barplot of each cause of death above (Figure 10), over from 2001-2023, the most common cause of death (given that it occurred) with 13,000 counts is C00-D48 (neoplasms). The second most frequent one is I00-I99 (circulatory system diseases) with 12,000 cases. Interestingly enough, the O00-O99 that kills people at younger ages (mentioned at the very start in the main report), is the rarest disease.
