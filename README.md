@@ -1,6 +1,7 @@
-<img width="441" alt="Screenshot 2024-04-07 at 10 58 22 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/f98fbb86-24e7-4a67-9784-980228db3c52">
- 
-	OBJECTIVES
+
+ <img width="324" alt="Screenshot 2024-04-07 at 11 02 36 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/cebd3d96-7516-4fd0-a717-562feff8ff08">
+
+**OBJECTIVES**
 
 Main Objectives
 	. Reduce the mortality rate of current SuperLife policyholders 
@@ -19,11 +20,14 @@ Data Preparation and Cleaning
 For DB modelling, it’s very important to include as many policyholders as possible who are dead, lapsed, and still alive as of 2023. If we naively only analysed dead people, then that would underestimate the “true” average years before death of the sample given. This is because the years before death of people who are still alive or have lapsed is unknown and could possibly take high values. There cannot be too many missing NA values in the predictors and the response as it would propagate (especially in models with thousands of trees) and predictions would have many NA’s. At the same time, by keeping all columns and removing all NA values results in a totally empty dataset. Here, a balance is achieved by removing the year of lapse column, since 
 that has the highest percentage of NA values.
 
-Figure 1 
- 
+Figure 1 below
+<img width="794" alt="Screenshot 2024-04-07 at 11 03 13 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/284330db-656c-4ac6-a8c8-31932a7bbc19">
+
 From above, the horizontal black line denotes the median, and the black star the mean of each cause of death. The median and mean lifespans for each disease are quite similar. Outliers are shown as individual dots when they are Q3 + 1.5*IQR or greater, or Q1-1.5*IQR or smaller. The disease O00-O99 has obviously a very small IQR (spread), and the lifespans of those afflicted are very short. This could be quite a severe disease that kills people at younger ages, however its frequency will be explored more in the corresponding barplot below. According to the ICD-10, O00-O99 refers to “personal history of complications of pregnancy, childbirth and the puerperium”.
 
-From figure 2 on the left, note that the rates increase and decrease together and seem to be highly correlated with one another. In 2015 when the 1 year risk free (r.f) annual spot rate and overnight rate starts to increase again. Interestingly, the 10-year r.f annual spot rate still has not started increasing yet even at 2023. For more EDA plots and further analysis, see Appendix 1.
+<img width="528" alt="Screenshot 2024-04-07 at 11 03 35 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/df6f015a-a6fd-4f64-9315-0f95a2f1c39f">
+
+From figure 2 above, note that the rates increase and decrease together and seem to be highly correlated with one another. In 2015 when the 1 year risk free (r.f) annual spot rate and overnight rate starts to increase again. Interestingly, the 10-year r.f annual spot rate still has not started increasing yet even at 2023. For more EDA plots and further analysis, see Appendix 1.
 
 **PROGRAM DESIGN**
 
@@ -53,7 +57,7 @@ From the in force data the face amounts of both policies are varying but are kno
 
 The Present Value of Profit for each policy type is calculated by categorising our data into 4 different age groups 26 ~35, 36 ~ 45, 46 ~ 55, and 56 ~ 65 with different face amounts. Where the formula used to calculate is Pt – Ct – Et – CLt – CRt + It (Details for each case refer to appendix). Premiums, commission, reserve increase, and expenses are set by assumption. When the policyholder is integrated into the program, the mortality cost associated with the individual is reduced due to the decrease in mortality rate. Thus, PV of profit will decrease after the program is implemented if the mortality rate decreases the benefit claims.
 
-**Pricing Pre-Program VS Post-Program**
+<img width="936" alt="Screenshot 2024-04-07 at 11 04 51 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/84137b83-caa8-456d-88d5-b11b132ad4f7">
 
 For the T20 assurance above on the left (Figure 3), there are now less deaths within the 20 year term with the program compared to without. This is because with the predicted increase in health check ups, people have increased awareness and are able to detect possibly fatal diseases earlier. This leads them to act and seek medical intervention before the condition deteriorates. The biggest improvement is in the 46-55 age group, where the PV of profit jumps from 800 million Lumarian Crowns (LC) to 2400 million. 
 For the SPWL assurance on the top right (Figure 4), initially for the younger age group, the aggregate PV of profit is more or less similar pre and post program. As younger Lumarians are more healthy and have lower hazard rates than older ones (all else equal), health checks usually would reveal no fatal diseases at that point in time. So the program would not do much to decrease the mortality of younger people. The gap of improvement for the 3 older age groups seems to be around the same, with a 1.15 billion extra PV profit after program implementation. This means that those health checks really do help older generations detect and combat diseases early, meaning on average they die later leading to lower PV of death benefit.
@@ -61,7 +65,10 @@ For the SPWL assurance on the top right (Figure 4), initially for the younger ag
 **Mortality Savings**
 Mortality Savings are calculated by the differences between PV of Profit before the program was implemented and after. The graph below on the left (Figure 5) below clearly shows that the 20-year term insurance mortality savings increased across older age groups. However, for the SPWL insurance on the bottom right (Figure 6), the mortality saving is decreasing then spiking at age group 46-55 and then decreasing once again. Although the program being implemented does have a positive effect on the mortality savings as demonstrated by the positive magnitudes, it does not seem to be as effective as the 20-year term. 
 
-Pricing Changes
+
+<img width="929" alt="Screenshot 2024-04-07 at 11 05 25 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/cae92be9-d054-4ac2-9fe3-03d32387d086">
+
+**Pricing Changes**
 Implementing a dynamic pricing model to adjust prices based on real-time changes in various factors such as age group, mortality savings, economic value, and market conditions can be an ideal method in optimising sales.For instance,  adjusting prices to attract customers in age brackets where mortality savings are higher, SuperLife can effectively capitalise on the marketability of these policies. This can be done by offering more competitive premiums for younger age groups, where mortality savings are typically lower, can incentivise customers to purchase policies, thereby optimising sales and profitability.
 
 **RISK AND RISK MITIGATION CONSIDERATIONS**
@@ -105,11 +112,16 @@ In order to test whether assumptions may be too unrealistic, sensitivity analysi
 Discount rates ranging close to the assumed rate (2% - 5%) and 97.5% VaR (upper tail) are tested for both the whole life and 20-year insurance product. Test results show that compared to 20-year term insurance, the profitability of whole life insurance is more sensitive to interest rate changes. 
 Additionally, insurance for older age groups generally is more sensitive to price change than younger age group due to a worse mortality. However, for each insurance product sold, the new program is able to generate a higher profit margin for all tested interest rates. 
 
+![Uploading Screenshot 2024-04-07 at 11.06.01 pm.png…]()
 
-As seen on the left plot (Figure 7), regardless of interest rate and age group, the new product for whole life insurance is able to generate a higher profit margin. Moreover, the profit margin roughly forms a linear relationship as interest rates increase. The profit margin of the new program remains positive as long as interest rate is above 3%, which has more than 85% possibility of happening. So in other words, the degree of certainty that our proposed program can generate a positive profit and exceed profit without proposed program is greater than 85%.
 
-Expenses
+As seen above (Figure 7), regardless of interest rate and age group, the new product for whole life insurance is able to generate a higher profit margin. Moreover, the profit margin roughly forms a linear relationship as interest rates increase. The profit margin of the new program remains positive as long as interest rate is above 3%, which has more than 85% possibility of happening. So in other words, the degree of certainty that our proposed program can generate a positive profit and exceed profit without proposed program is greater than 85%.
+
+**Expenses**
 In the hypothetical scenario that the budgeted expense per policy year is too little for each policy sold, a test was run on 1.5 times and 2 times the original expense respectively. The insurance products for the 26-35 age group is presented below (see other age groups in appendix). 
+
+<img width="911" alt="Screenshot 2024-04-07 at 11 06 40 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/79f803dc-7ae6-4fd9-b04b-d54dabf915cd">
+
 Figure 8 is on the left and figure 9 on the right. The graphs show that when multiplying the assumed annual expense by 1.5, the impact is minimal in SPWL, as well as the T20 for higher face values. However this impact is catastrophic for the 100,000 and 50,000 face value policies as it may cause a significantly lower, or even a negative profit margin. The impact on whole life insurance with other age groups are not as drastic as shown in Figure 9, but for both 36-45 and 46-55 age groups, profit margin less than halved when annual expenses are doubled. Thus, if expenses are indeed underestimated, the pricing solution would need to be re-evaluated. 
 
 Potential Decrease in New Customers
@@ -132,14 +144,21 @@ Ages and years are treated as discrete variables for modelling. Of course theore
 Lumaria has a universal healthcare system. Similar to other countries with a universal healthcare system, such as Australia and Canada, it is assumed that Lumarian health check-ups including blood pressure readings, cholesterol level tests and age-specific preventative scans, are provided without upfront fees. 
 
 The travel points expense is only incurred once the policyholder completes the checklist and earns the reward. Therefore, the participation rate in the checklist program impacts the total expenses for SuperLife insurance. Travel is assumed to be an appropriate incentive for all ages, hence the willingness to complete the health check-ups will determine the participation rate in the program. The checklist participation rate was informed by the participation rate in Australian government-funded cancer screening programs, namely bowel cancer, breast cancer and cervical cancer. Similar to Lumaria’s health care, these programs were free, focused on early disease detection and were reasonably marketed as this program would be among SuperLife policyholders. The underlying trend in the data indicated increased participation with age, which was replicated in the assumed participation rate for the checklist program. Additionally, the participation rates for the screening programs were roughly increased by a factor of 0.3 to account for the incentivised nature of the checklist program and adjusted to a more linear trend for ease of use. 
-Pricing
-	Investment return used to calculate the present value of profit is 4% higher than the interest rate for 20-year term Insurance and 5% higher for Single Whole Life Insurance (SPWL). The reason that SPWL Insurance investment rate is higher is that it invested in a longer period thus higher return.
-	Premiums are calculated by setting the pre-program profit margin to be 5%.
-	Commissions are assumed to be 80% of the premium for duration 1 and 2% afterward.
-	Pre-programme expenses are assumed to be 200 Crowns for duration 1 and 25 Crowns afterwards.
-	 Post-Programme Expenses are assumed to be 200 + expenses load*80 Crowns for duration 1 and 25 Crowns afterwards. Where the expense load is the probability that the age group policyholder will finish the checklist is 50% for the age group 26-35,  60% for the age group 36-45, 70% for the age group 46-55, and 85% for the age group 56-65
-	Premium, commission, reserve increase and interest are assumed to be constant across pre and post program implementation.
-	The effect of two interventions on mortality are assumed to be independent. 
+
+**Pricing**
+. Investment return used to calculate the present value of profit is 4% higher than the interest rate for 20-year term Insurance and 5% higher for Single Whole Life Insurance (SPWL). The reason that SPWL Insurance investment rate is higher is that it invested in a longer period thus higher return
+
+. Premiums are calculated by setting the pre-program profit margin to be 5%
+
+. Commissions are assumed to be 80% of the premium for duration 1 and 2% afterward
+
+. Pre-programme expenses are assumed to be 200 Crowns for duration 1 and 25 Crowns afterwards
+
+. Post-Programme Expenses are assumed to be 200 + expenses load*80 Crowns for duration 1 and 25 Crowns afterwards. Where the expense load is the probability that the age group policyholder will finish the checklist is 50% for the age group 26-35,  60% for the age group 36-45, 70% for the age group 46-55, and 85% for the age group 56-65
+
+. Premium, commission, reserve increase and interest are assumed to be constant across pre and post program implementation
+
+. The effect of two interventions on mortality are assumed to be independent. 
 
 **EXTERNAL DATA AND DATA LIMITATIONS**
 
@@ -156,16 +175,20 @@ The Lumaria mortality table is provided according to integer ages only. Policyho
 **Appendix**
 For the R code and Excel spreadsheets used in the analysis, please see those files in GitHub classroom. Generative AI was not used in this assignment.
 
-**Exploratory Data Analysis (EDA) (continued)**
+<img width="907" alt="Screenshot 2024-04-07 at 11 08 36 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/345af4af-bb08-4f17-9c6a-edbb24e41cd5">
+
  
 
 From the frequency barplot of each cause of death above (Figure 10), over from 2001-2023, the most common cause of death (given that it occurred) with 13,000 counts is C00-D48 (neoplasms). The second most frequent one is I00-I99 (circulatory system diseases) with 12,000 cases. Interestingly enough, the O00-O99 that kills people at younger ages (mentioned at the very start in the main report), is the rarest disease.
 
- 
+<img width="926" alt="Screenshot 2024-04-07 at 11 09 57 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/e544737d-8c93-4918-9a9d-5fe57f6e28d9">
+
+
 
 From the frequency histogram above (Figure 11), the most popular issue ages of life policy are 38-42 and 50-54 age groups. Intuitively, this could be due to the so-called “mid-life crisis” phenomenon, where illnesses come more frequently than before when they were younger. Up until age 37 the rate of issues increases quite steadily (like an increasing step function). And from age 55 onwards it decreases quite steadily too (decreasing step function). If a straight vertical line were drawn at age 46, this histogram looks almost symmetrical.
 
- 
+ <img width="882" alt="Screenshot 2024-04-07 at 11 10 10 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/87927d5d-8d29-4fb9-975f-cb9bb76b77f2">
+
 From Figure 12, this shows the mortality rate (curve) increasing at an increasing rate as people grow older. This is a typical convex curve used to model human mortality. Notice how the graduated smooth curve fits nicely over the plotted points, with the exception of the outlier at age 120 (maximum age where everyone must die before).
 
 
