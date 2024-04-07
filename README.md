@@ -217,8 +217,8 @@ In the first step (inner loop), the hyperparameters above are tuned, and 8 estim
 
 In the next step (outer loop), construct a new training set made up of the above so that new train = old train + old validation set. Recall that is 75% of the in force data is (new train + new validation) = old train + old validation + new validation. Obtain the NLL and UCI for each model (each with its own set of optimal hyperparameters). Then finally, pick the best/winner model with the lowest NLL and/or highest Uno’s C-index.
 
-<img width="680" alt="Screenshot 2024-04-07 at 11 16 04 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/8c633561-fc93-4e03-8e21-4c533dc57f3a">
 
+<img width="589" alt="Screenshot 2024-04-07 at 11 33 12 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/24135940-e9af-43b7-a93d-1a4fe8c65dd4">
 
 
 Importantly, a model with the highest UCI tends to give good predicted rankings of death, but not necessarily good predicted death times. It does not care about their actual/observed times, but rather the order in which they happened (scale and shift invariant). This could be problematic in calculating DB, because for that you need to predict in which particular year they died in. So NLL is a more important metric in this case, and UCI is only used as a tiebreaker if the models have the same NLL.
@@ -251,7 +251,8 @@ Cash flow for the year t CFt ,  reserve increase for that year CRt and interest 
 
 <img width="732" alt="Screenshot 2024-04-07 at 11 18 33 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/9307cdf2-8da7-4e41-8346-839ebb0c3616">
 
-<img width="999" alt="Screenshot 2024-04-07 at 11 19 33 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/c9138e68-65fb-4070-b553-58cd75ce46c9">
+
+<img width="947" alt="Screenshot 2024-04-07 at 11 34 13 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/3da9defc-c63e-411d-8d45-3f16eb1a0030">
 
 
 With both expenses and claims being respectively loaded to account for the programme implementation.
