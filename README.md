@@ -12,7 +12,7 @@
 * Hasibul Alam 
 # Report Overview
 
-**OBJECTIVES**
+## Objectives
 
 Main Objectives
 
@@ -47,7 +47,7 @@ From above, the horizontal black line denotes the median, and the black star the
 
 From figure 2 above, note that the rates increase and decrease together and seem to be highly correlated with one another. In 2015 when the 1 year risk free (r.f) annual spot rate and overnight rate starts to increase again. Interestingly, the 10-year r.f annual spot rate still has not started increasing yet even at 2023. For more EDA plots and further analysis, see Appendix 1.
 
-**PROGRAM DESIGN**
+## Program Design 
 
 We propose a joint venture between SuperLife Insurance and a Lumarian airline company, in which policyholders are awarded travel points for completing a health checklist. The checklist will monitor blood pressure, cholesterol and other markers of a healthy circulatory system and include preventative scans for various conditions such as cancer. Neoplasms (C00-D48) and circulatory system diseases (I00-I99) are responsible for 63% of policyholder deaths between 2001 and 2023, with the average age of death being 59.8 and 60.5, respectively. These ages are below the average Lumarian life expectancy, 78.4, indicating that mortality improvements are achievable. Early detection of these two primary causes of death will reduce mortality rates by 10-20% according to similar Lumarian intervention schemes. The checklist is an online document that can be printed by the policyholder and presented to the relevant medical practitioner, who will sign, stamp and date the appropriate area of the form to confirm the policyholder’s completion of a checklist task. SuperLife Insurance only incentivises the completion of this checklist without funding the scans or tests. 
 
@@ -61,7 +61,7 @@ The criteria upon which the Lumarian Airline will be selected include having a p
 
 Short-term evaluations will occur in 3-5 years. This will provide sufficient time for mortality reductions, through early disease detection, to occur and enable awareness of the program, through word-of-mouth and media outlets, to contribute towards a higher customer base for SuperLife Insurance. Long-term evaluations will occur in 5-10 years. This period was selected to facilitate the observation of trends in mortality data as well as the risk profile and rate of new policyholders.
 
-**PRICING / COSTS**
+## Pricing/Costs
 
 **Death Benefits (DB) calculation**
 
@@ -91,11 +91,11 @@ Mortality Savings are calculated by the differences between PV of Profit before 
 
 Implementing a dynamic pricing model to adjust prices based on real-time changes in various factors such as age group, mortality savings, economic value, and market conditions can be an ideal method in optimising sales.For instance,  adjusting prices to attract customers in age brackets where mortality savings are higher, SuperLife can effectively capitalise on the marketability of these policies. This can be done by offering more competitive premiums for younger age groups, where mortality savings are typically lower, can incentivise customers to purchase policies, thereby optimising sales and profitability.
 
-**RISK AND RISK MITIGATION CONSIDERATIONS**
+## Risk and Risk Mitigation 
 
 **Risks**
 
-In the case of implementing a health program and partnering with a chosen airline, an RDC categorisation method had been used to classify the risks.
+In the case of implementing a health program and partnering with a chosen airline, an RDC categorisation method was used to classify the risks.
 
 <img width="361" alt="Screenshot 2024-04-07 at 11 47 33 pm" src="https://github.com/Actuarial-Control-Cycle-T1-2024/group-page-showcase-cc24/assets/68623529/86cf144a-6843-4472-a0c7-d2f2eb814e96">
 
@@ -157,7 +157,7 @@ In other words, any increase in customers can magnify the difference in profit b
 
 
 
-**ASSUMPTIONS**
+## Assumptions
 
 **Modelling**
 
