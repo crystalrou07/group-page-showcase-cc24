@@ -15,18 +15,14 @@
 ## Objectives
 
 Main Objectives
-
-. Reduce the mortality rate of current SuperLife policyholders 
-
-. Attract and retain healthy and health-conscious clients 
+1. Reduce the mortality rate of current SuperLife policyholders 
+2. Attract and retain healthy and health-conscious clients 
+3. Increase SuperLife's economic value
 
 Metrics 
-
-. Extent of reductions in mortality rate
-
-. Profitability of the program
-
-. Customer acquisition rates
+1. Extent of reductions in mortality rate
+2. Profitability of the program
+3. Customer acquisition rates
 
 **EXPLORATORY DATA ANALYSIS (EDA) & DATA CLEANING**
 
