@@ -116,11 +116,11 @@ It is highly unlikely that the interest rate will rise significantly all of a su
 
 **Technology Risk:**
 
-. Implementing a system for the continuous monitoring of technological advancements, cybersecurity threats, and industry innovations. This could include the regular update of the systems, software, and infrastructure supporting the health incentive program
+* Implementing a system for the continuous monitoring of technological advancements, cybersecurity threats, and industry innovations. This could include the regular update of the systems, software, and infrastructure supporting the health incentive program
 
-. Implementing strict access controls and data encryption practices to safeguard sensitive information collected throughout the program. 
+* Implementing strict access controls and data encryption practices to safeguard sensitive information collected throughout the program. 
 
-. Providing training to employees on cybersecurity best practices to minimise the risk of human error leading to vulnerabilities and malpractices.
+* Providing training to employees on cybersecurity best practices to minimise the risk of human error leading to vulnerabilities and malpractices.
 
 
 **Sensitivity Analysis**
